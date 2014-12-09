@@ -33,9 +33,9 @@ zsh         yes
 Updating recursively is also very easy:
 ```bash
 $ bk sync
-Sync'ing package 'vim'.
+Syncing package 'vim'.
 Done
-Sync'ing package 'zsh'.
+Syncing package 'zsh'.
 Added new folder:   zsh/.zsh
 Added new file:     zsh/.zshrc
 Sync complete!
