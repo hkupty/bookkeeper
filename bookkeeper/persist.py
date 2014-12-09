@@ -15,14 +15,15 @@ class DB(object):
     @classmethod
     def get_instance(cls):
         """ Singleton instance. """
-        if DB._instance == None:
+        if DB._instance is None:
             DB._instance = cls()
         return DB._instance
 
     def __init__(self):
-        self.connection = sql.connect('$HOME/.bookkeeper_db')
+        """ Create sqlite connection. """
+        self.connection = sqlite.connect('$HOME/.bookkeeper_db')
 
-    def exec(self, command, *args):
+    def exc(self, command, *args):
         """ Wrapper for sqlite exec. """
         cursor = self.connection.cursor()
         cursor.execute(command, *args)
@@ -30,7 +31,7 @@ class DB(object):
 
     def add_item(self, app, item, item_type):
         """ Simple wrapper for inserting item. """
-        self.exec(
+        self.exc(
             """ INSERT OR IGNORE INTO inner (app, object, type)
             VALUES (?, ?, ?) """,
             app, item, item_type
@@ -38,7 +39,7 @@ class DB(object):
 
     def add_app(self, app, source, target):
         """ Simple wrapper for inserting app. """
-        self.exec(
+        self.exc(
             """ INSERT OR IGNORE INTO app (app, source_path, target_path)
             VALUES (?, ?, ?) """,
             app, source, target
@@ -49,11 +50,11 @@ def install():
     """ Create basic db. """
     db = DB.get_instance()
 
-    db.exec("""CREATE TABLE apps
+    db.exc("""CREATE TABLE apps
     (app text, source_path text, target_path text)
     UNIQUE (app, source_path, target_path)
     """)
-    db.exec("""CREATE TABLE inner
+    db.exc("""CREATE TABLE inner
     (app text, object text, type text)
     UNIQUE (app, object, type)
     """)
