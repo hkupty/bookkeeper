@@ -15,11 +15,12 @@ def sync(app, target="$HOME", exclude=None):
 
     for item in os.listdir(app):
         is_file = os.path.isfile(item)
+        is_folder = not is_file
 
         os.symlink(
             os.path.join(app, item),
-            os.path.join(target, item)
-            target_is_directory=(not is_file)
+            os.path.join(target, item),
+            target_is_directory=is_folder
         )
 
         _db.add_item(app, item, "file" if is_file else "folder")
