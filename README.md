@@ -1,5 +1,6 @@
 Bookkeeper
 ==========
+[![Code Health](https://landscape.io/github/hkupty/bookkeeper/master/landscape.svg)](https://landscape.io/github/hkupty/bookkeeper/master)
 
 GNU Stow with steroids!
 
