@@ -22,11 +22,27 @@ class DB(object):
     def __init__(self):
         self.connection = sql.connect('$HOME/.bookkeeper_db')
 
-    def exec(self, command):
+    def exec(self, command, *args):
         """ Wrapper for sqlite exec. """
         cursor = self.connection.cursor()
-        cursor.execute(command)
+        cursor.execute(command, *args)
         cursor.commit()
+
+    def add_item(self, app, item, item_type):
+        """ Simple wrapper for inserting item. """
+        self.exec(
+            """ INSERT OR IGNORE INTO inner (app, object, type)
+            VALUES (?, ?, ?) """,
+            app, item, item_type
+        )
+
+    def add_app(self, app, source, target):
+        """ Simple wrapper for inserting app. """
+        self.exec(
+            """ INSERT OR IGNORE INTO app (app, source_path, target_path)
+            VALUES (?, ?, ?) """,
+            app, source, target
+        )
 
 
 def install():
@@ -35,7 +51,9 @@ def install():
 
     db.exec("""CREATE TABLE apps
     (app text, source_path text, target_path text)
+    UNIQUE (app, source_path, target_path)
     """)
     db.exec("""CREATE TABLE inner
     (app text, object text, type text)
+    UNIQUE (app, object, type)
     """)
