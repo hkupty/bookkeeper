@@ -24,4 +24,3 @@ def sync(app, target="$HOME", exclude=None):
         )
 
         _db.add_item(app, item, "file" if is_file else "folder")
-

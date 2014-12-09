@@ -15,9 +15,9 @@ class DB(object):
     @classmethod
     def get_instance(cls):
         """ Singleton instance. """
-        if _instance = None:
-            _instance = cls()
-        return _instance
+        if DB._instance == None:
+            DB._instance = cls()
+        return DB._instance
 
     def __init__(self):
         self.connection = sql.connect('$HOME/.bookkeeper_db')
