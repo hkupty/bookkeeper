@@ -5,7 +5,7 @@ This is where we understand and implement
 the logic behind the whole process.
 """
 import os
-from bokkeeper.persist import DB
+from bookkeeper.persist import DB
 
 
 def sync(app, target="$HOME", exclude=None):
