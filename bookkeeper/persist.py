@@ -46,10 +46,10 @@ class DB(object):
         try:
             cursor = connection.cursor()
             cursor.execute(command, *args)
-        except :
-            self.connection.rollback()
+        except sqlite3.Error:
+            connection.rollback()
         else:
-            self.connection.commit()
+            connection.commit()
 
     def add_item(self, app, item, item_type):
         """ Simple wrapper for inserting item. """
