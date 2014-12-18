@@ -8,19 +8,14 @@ import os
 from bookkeeper.persist import DB
 
 
-def sync(app, target="$HOME", exclude=None):
+def link(source, target):
     """ Install all items in app as symlinks in target. """
     _db = DB.get_instance()
-    exclude = exclude or []
-
-    for item in os.listdir(app):
-        is_file = os.path.isfile(item)
-        is_folder = not is_file
-
-        os.symlink(
-            os.path.join(app, item),
-            os.path.join(target, item),
-            target_is_directory=is_folder
-        )
-
-        _db.add_item(app, item, "file" if is_file else "folder")
+    full_source = os.path.abspath(source)
+    source_path, app = os.path.split(full_source)
+    target_path = (
+        os.path.expandvars(target)
+        if '$' in target else
+        os.path.expanduser(target)
+    )
+    _db.add_app(app, source_path, target_path)
