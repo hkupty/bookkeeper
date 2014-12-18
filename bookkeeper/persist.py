@@ -29,22 +29,27 @@ class DB(object):
 
     def __init__(self, verbose=False):
         """ Create sqlite connection. """
-        path = (
+        self.path = (
             os.path.expandvars(DB_FILE)
             if '$' in DB_FILE else
             os.path.expanduser(DB_FILE)
         )
-
-        self.connection = sqlite3.connect(path)
         self.verbose = verbose
 
     def exc(self, command, *args):
         """ Wrapper for sqlite exec. """
-        cursor = self.connection.cursor()
+        connection = sqlite3.connect(self.path)
+
         if self.verbose:
             print(command, args)
-        cursor.execute(command, *args)
-        self.connection.commit()
+
+        try:
+            cursor = connection.cursor()
+            cursor.execute(command, *args)
+        except :
+            self.connection.rollback()
+        else:
+            self.connection.commit()
 
     def add_item(self, app, item, item_type):
         """ Simple wrapper for inserting item. """
