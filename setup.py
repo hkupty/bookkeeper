@@ -14,5 +14,12 @@ setup(
     license=bookkeeper.__license__,
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
+        'Environment :: Console',
+        'Intended Audience :: Developers',
+        'Intended Audience :: End Users/Desktop',
+        'Operating System :: POSIX',
+        'Programming Language :: Python :: 3.4',
+        'Topic :: System :: Filesystems',
+        'Topic :: Utilities'
     ]
 )
