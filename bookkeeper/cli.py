@@ -9,7 +9,7 @@ import sys
 
 def init(fargs):
     """ Init the db. """
-    from persist import install, DB
+    from bookkeeper.persist import install, DB
     DB.set_verbose(fargs.verbose)
     install()
 
