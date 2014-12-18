@@ -1,3 +1,5 @@
 .idea
 .ropeproject
 __pycache__/
+MANIFEST
+dist/
