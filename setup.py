@@ -14,6 +14,8 @@ setup(
     and painless.""",
     scripts=['bin/bk'],
     license=bookkeeper.__license__,
+    download_url='http://github.com/hkupty/bookkeeper',
+    packages=['bookkeeper'],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Environment :: Console',
