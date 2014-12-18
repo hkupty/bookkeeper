@@ -3,7 +3,10 @@
 
 This allows bookkeeper to keep track of which is installed (and where).
 """
-import sqlite
+import os
+import sqlite3
+
+DB_FILE = '~/.bookkeeper.db'
 
 
 class DB(object):
@@ -19,15 +22,29 @@ class DB(object):
             DB._instance = cls()
         return DB._instance
 
-    def __init__(self):
+    @classmethod
+    def set_verbose(cls, verbose):
+        """ Toggle verbosity. """
+        cls.get_instance().verbose = verbose
+
+    def __init__(self, verbose=False):
         """ Create sqlite connection. """
-        self.connection = sqlite.connect('$HOME/.bookkeeper_db')
+        path = (
+            os.path.expandvars(DB_FILE)
+            if '$' in DB_FILE else
+            os.path.expanduser(DB_FILE)
+        )
+
+        self.connection = sqlite3.connect(path)
+        self.verbose = verbose
 
     def exc(self, command, *args):
         """ Wrapper for sqlite exec. """
         cursor = self.connection.cursor()
+        if self.verbose:
+            print(command, args)
         cursor.execute(command, *args)
-        cursor.commit()
+        self.connection.commit()
 
     def add_item(self, app, item, item_type):
         """ Simple wrapper for inserting item. """
@@ -50,11 +67,17 @@ def install():
     """ Create basic db. """
     db = DB.get_instance()
 
-    db.exc("""CREATE TABLE apps
-    (app text, source_path text, target_path text)
-    UNIQUE (app, source_path, target_path)
+    db.exc("""CREATE TABLE IF NOT EXISTS apps
+    (
+        app         TEXT    NOT NULL    UNIQUE,
+        source_path TEXT    NOT NULL    UNIQUE,
+        target_path TEXT    NOT NULL    UNIQUE
+    )
     """)
-    db.exc("""CREATE TABLE inner
-    (app text, object text, type text)
-    UNIQUE (app, object, type)
+    db.exc("""CREATE TABLE IF NOT EXISTS inner
+    (
+        app     TEXT        NOT NULL    UNIQUE,
+        object  TEXT        NOT NULL    UNIQUE,
+        type    TEXT        NOT NULL    UNIQUE
+    )
     """)
