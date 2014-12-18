@@ -51,6 +51,26 @@ class DB(object):
         else:
             connection.commit()
 
+    def qry(self, query, *args):
+        """ Wrapper for sqlite exec. """
+        connection = sqlite3.connect(self.path)
+
+        if self.verbose:
+            print(query, args)
+
+        return connection.execute(query, *args)
+
+    def list_app_items(self, app):
+        """ Return all items listed in the app. """
+        query = """
+        SELECT app, object, type
+        FROM inner
+        INDEXED BY ix_app
+        WHERE app = ?
+        """
+
+        return self.qry(query, app)
+
     def add_item(self, app, item, item_type):
         """ Simple wrapper for inserting item. """
         self.exc(
@@ -74,15 +94,17 @@ def install():
 
     db.exc("""CREATE TABLE IF NOT EXISTS apps
     (
-        app         TEXT    NOT NULL    UNIQUE,
-        source_path TEXT    NOT NULL    UNIQUE,
-        target_path TEXT    NOT NULL    UNIQUE
+        app         TEXT NOT NULL UNIQUE,
+        source_path TEXT NOT NULL UNIQUE,
+        target_path TEXT NOT NULL UNIQUE
     )
     """)
     db.exc("""CREATE TABLE IF NOT EXISTS inner
     (
-        app     TEXT        NOT NULL    UNIQUE,
-        object  TEXT        NOT NULL    UNIQUE,
-        type    TEXT        NOT NULL    UNIQUE
+        app    TEXT NOT NULL UNIQUE,
+        object TEXT NOT NULL UNIQUE,
+        type   TEXT NOT NULL UNIQUE
     )
     """)
+
+    db.exc("""CREATE INDEX ix_app ON inner (app) """)

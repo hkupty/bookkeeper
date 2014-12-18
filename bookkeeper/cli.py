@@ -15,7 +15,8 @@ def init(fargs):
 
 def sync(fargs):
     """ Sync all installed links. """
-    pass
+    target_app = fargs.target
+
 
 
 def link(fargs):
