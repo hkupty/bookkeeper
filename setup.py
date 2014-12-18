@@ -9,7 +9,9 @@ setup(
     author=bookkeeper.__author__,
     author_email='hkupty@gmail.com',
     description='GNU Stow with steroids',
-    long_description="""A dotfile manager with a sane interface. """,
+    long_description=""" Bookkeeper works as a symbolic link manager.
+    With some more flexibility, Bookkeeper makes the management of dotfiles easy
+    and painless.""",
     scripts=['bin/bk'],
     license=bookkeeper.__license__,
     classifiers=[
