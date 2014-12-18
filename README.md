@@ -2,6 +2,8 @@ Bookkeeper
 ==========
 [![Code Health](https://landscape.io/github/hkupty/bookkeeper/master/landscape.svg)](https://landscape.io/github/hkupty/bookkeeper/master)
 
+[![Development Status](https://pypip.in/status/<PYPI_PKG_NAME>/badge.svg)](https://pypi.python.org/pypi/<PYPI_PKG_NAME>/)
+
 GNU Stow with steroids!
 
 Bookkeeper works as a symbolic link manager with some more flexibility,
