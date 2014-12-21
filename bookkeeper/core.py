@@ -51,7 +51,7 @@ def sync_file(file_path, target_path):
     :param file_path:
     :param target_path:
     """
-    if os.path.exists(target_path) :
+    if os.path.exists(target_path) and not os.path.islink(target_path):
         raise os.error("File exists.")
     elif os.path.islink(target_path):
         pass
