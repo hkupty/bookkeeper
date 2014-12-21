@@ -18,7 +18,7 @@ def link(source, target):
     _db.add_app(app, full_source, target_path)
 
 
-def list():
+def list_apps():
     """ Show all installed packages. """
     _db = DB.get_instance()
     print("Installed Apps")

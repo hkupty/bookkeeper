@@ -35,9 +35,9 @@ def link(fargs):
     sys.exit(0)
 
 
-def list(fargs):
+def list_apps(fargs):
     """ Unlink target. """
-    from bookkeeper.core import list as core_list
+    from bookkeeper.core import list_apps as core_list
     core_list()
 
     sys.exit(0)

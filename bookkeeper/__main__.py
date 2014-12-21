@@ -37,10 +37,10 @@ link_parser.add_argument('target', default='$HOME', nargs='?')
 link_parser.set_defaults(func=cli.link)
 
 list_parser = subparsers.add_parser(
-    'list', help=cli.list.__doc__, aliases=['ls'],
+    'list', help=cli.list_apps.__doc__, aliases=['ls'],
     parents=[default_parser]
 )
-list_parser.set_defaults(func=cli.list)
+list_parser.set_defaults(func=cli.list_apps)
 
 unlink_parser = subparsers.add_parser(
     'unlink', help=cli.unlink.__doc__, aliases=['un'],
