@@ -24,8 +24,9 @@ init_parser.set_defaults(func=cli.init)
 
 sync_parser = subparsers.add_parser(
     'sync', help=cli.sync.__doc__,
-    parents=[default_parser, sourced_parser]
+    parents=[default_parser]
 )
+sync_parser.add_argument('app', default=None, nargs='?')
 sync_parser.set_defaults(func=cli.sync)
 
 link_parser = subparsers.add_parser(

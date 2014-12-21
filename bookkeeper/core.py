@@ -28,6 +28,7 @@ def list():
             app, source, target
         ))
 
+
 def sync(app=None):
     """ Sync all items from source.
 
@@ -65,13 +66,13 @@ def sync_folder(folder_path, target_path):
     :param target_path: target folder.
     """
     if os.path.exists(target_path):
-        if not os.path.isfolder(target_path):
+        if not os.path.isdir(target_path):
             raise os.error("Target folder is a file.")
         elif not os.path.islink(target_path):
             for item in os.listdir(folder_path):
                 full_item_path = os.path.join(folder_path, item)
-                if os.path.isfolder(full_item_path):
-                    new_target_path = os.path.join(target_path, item)
+                new_target_path = os.path.join(target_path, item)
+                if os.path.isdir(full_item_path):
                     sync_folder(full_item_path, new_target_path)
                 else:
                     sync_file(full_item_path, new_target_path)

@@ -13,10 +13,16 @@ def init(fargs):
     DB.set_verbose(fargs.verbose)
     install()
 
+    sys.exit(0)
+
 
 def sync(fargs):
     """ Sync all installed links. """
-    target_app = fargs.target
+    from bookkeeper.core import sync as core_sync
+    app = fargs.app
+    core_sync(app)
+
+    sys.exit(0)
 
 
 def link(fargs):
