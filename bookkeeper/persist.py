@@ -46,7 +46,8 @@ class DB(object):
         try:
             cursor = connection.cursor()
             cursor.execute(command, *args)
-        except sqlite3.Error:
+        except sqlite3.Error as e:
+            print(e)
             connection.rollback()
         else:
             connection.commit()
