@@ -5,6 +5,7 @@ This allows bookkeeper to keep track of which is installed (and where).
 """
 import os
 import sqlite3
+from bookkeeper.util import get_path
 
 DB_FILE = '~/.bookkeeper.db'
 
@@ -29,11 +30,7 @@ class DB(object):
 
     def __init__(self, verbose=False):
         """ Create sqlite connection. """
-        self.path = (
-            os.path.expandvars(DB_FILE)
-            if '$' in DB_FILE else
-            os.path.expanduser(DB_FILE)
-        )
+        self.path = get_path(DB_FILE)
         self.verbose = verbose
 
     def exc(self, command, *args):
