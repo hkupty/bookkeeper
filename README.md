@@ -1,6 +1,6 @@
 Bookkeeper
 ==========
-[![Code Health](https://landscape.io/github/hkupty/bookkeeper/master/landscape.svg)](https://landscape.io/github/hkupty/bookkeeper/master) [![Development Status](https://pypip.in/status/bookkeeper/badge.svg)](https://pypi.python.org/pypi/Bookkeeper/)
+[![Code Health](https://landscape.io/github/hkupty/bookkeeper/master/landscape.svg)](https://landscape.io/github/hkupty/bookkeeper/master) [![Development Status](https://pypip.in/status/Bookkeeper/badge.svg)](https://pypi.python.org/pypi/Bookkeeper/)
 
 GNU Stow with steroids!
 
