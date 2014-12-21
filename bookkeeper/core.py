@@ -19,3 +19,14 @@ def link(source, target):
         os.path.expanduser(target)
     )
     _db.add_app(app, source_path, target_path)
+
+
+def list():
+    """ Show all installed packages. """
+    _db = DB.get_instance()
+    print("Installed Apps")
+    print("{0:<15}{1:<15}{2:<15}".format("APP", "PATH", "INSTALLED AT"))
+    for app, source, target in _db.fetch_app():
+        print("{0:<15}{1:<15}{2:<15}".format(
+            app, source, target
+        ))

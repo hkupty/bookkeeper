@@ -4,6 +4,7 @@
 Every set of params and input shall and will be treated here.
 """
 from __future__ import absolute_import
+import sys
 
 
 def init(fargs):
@@ -22,6 +23,14 @@ def sync(fargs):
 def link(fargs):
     """ Link target with destination. """
     pass
+
+
+def list(fargs):
+    """ Unlink target. """
+    from bookkeeper.core import list as core_list
+    core_list()
+
+    sys.exit(0)
 
 
 def unlink(fargs):
