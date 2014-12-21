@@ -69,22 +69,36 @@ class DB(object):
         WHERE app = ?
         """
 
-        return self.qry(query, app)
+        return self.qry(query, (app, ))
+
+    def fetch_app(self, app=None):
+        """ Return app row.
+
+        If app is None, return all apps.
+        """
+        query = """
+        SELECT app, source_path, target_path
+        FROM apps
+        """
+        if app is not None:
+            query += """ WHERE app = ? """
+            return self.qry(query, (app, ))
+        return self.qry(query)
 
     def add_item(self, app, item, item_type):
         """ Simple wrapper for inserting item. """
         self.exc(
             """ INSERT OR IGNORE INTO inner (app, object, type)
             VALUES (?, ?, ?) """,
-            app, item, item_type
+            (app, item, item_type, )
         )
 
     def add_app(self, app, source, target):
         """ Simple wrapper for inserting app. """
         self.exc(
-            """ INSERT OR IGNORE INTO app (app, source_path, target_path)
+            """ INSERT OR IGNORE INTO apps (app, source_path, target_path)
             VALUES (?, ?, ?) """,
-            app, source, target
+            (app, source, target, )
         )
 
 

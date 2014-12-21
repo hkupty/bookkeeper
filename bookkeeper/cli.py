@@ -19,10 +19,14 @@ def sync(fargs):
     target_app = fargs.target
 
 
-
 def link(fargs):
     """ Link target with destination. """
-    pass
+    from bookkeeper.core import link as core_link
+    source_path = fargs.source
+    target_path = fargs.target
+    core_link(source_path, target_path)
+
+    sys.exit(0)
 
 
 def list(fargs):
