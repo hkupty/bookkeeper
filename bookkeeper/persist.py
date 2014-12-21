@@ -3,7 +3,6 @@
 
 This allows bookkeeper to keep track of which is installed (and where).
 """
-import os
 import sqlite3
 from bookkeeper.util import get_path
 
