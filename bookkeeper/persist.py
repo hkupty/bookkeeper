@@ -34,28 +34,27 @@ class DB(object):
 
     def exc(self, command, *args):
         """ Wrapper for sqlite exec. """
-        connection = sqlite3.connect(self.path)
 
-        if self.verbose:
-            print(command, args)
+        with sqlite3.connect(self.path) as connection:
+            if self.verbose:
+                print(command, args)
 
-        try:
-            cursor = connection.cursor()
-            cursor.execute(command, *args)
-        except sqlite3.Error as e:
-            print(e)
-            connection.rollback()
-        else:
-            connection.commit()
+            try:
+                cursor = connection.cursor()
+                cursor.execute(command, *args)
+            except sqlite3.Error as e:
+                print(e)
+                connection.rollback()
+            else:
+                connection.commit()
 
     def qry(self, query, *args):
         """ Wrapper for sqlite exec. """
-        connection = sqlite3.connect(self.path)
+        with sqlite3.connect(self.path) as connection:
+            if self.verbose:
+                print(query, args)
 
-        if self.verbose:
-            print(query, args)
-
-        return connection.execute(query, *args)
+            return connection.execute(query, *args)
 
     def list_app_items(self, app):
         """ Return all items listed in the app. """
