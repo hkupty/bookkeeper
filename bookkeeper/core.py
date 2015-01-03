@@ -27,6 +27,13 @@ def list_apps():
         print("{0:<15}{1:<15}{2:<15}".format(
             app, source, target
         ))
+    print("Not Installed Apps (local folder)")
+    print("{0:<15}{1:<15}".format("APP", "PATH"))
+    for i in os.listdir(os.curdir):
+        if os.path.isdir(i):
+            print("{0:<15}{1:<15}".format(
+                i, os.path.abspath(i)
+            ))
 
 
 def sync(app=None):
