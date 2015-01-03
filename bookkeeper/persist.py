@@ -34,7 +34,6 @@ class DB(object):
 
     def exc(self, command, *args):
         """ Wrapper for sqlite exec. """
-
         with sqlite3.connect(self.path) as connection:
             if self.verbose:
                 print(command, args)
@@ -66,6 +65,27 @@ class DB(object):
         """
 
         return self.qry(query, (app, ))
+
+    def count_target_path(self, path="/"):
+        """ Check if path exists on the db.
+
+        Given the example:
+            test    /opt/dotfiles/test/ /home/user/test/
+            vim     /opt/dotfiles/vim/  /home/user/
+            other   /opt/share/other/   /home/user/
+
+        /home/user/ will retrun 3
+        /home/user/test/ will return 1
+        """
+        query = """
+        SELECT COUNT(1)
+        FROM apps
+        WHERE target_path GLOB ?
+        """
+
+        path += '*'
+
+        return self.qry(query, (path, ))
 
     def fetch_app(self, app=None):
         """ Return app row.

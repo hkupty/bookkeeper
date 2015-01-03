@@ -84,8 +84,9 @@ def sync_folder(folder_path, target_path):
                 else:
                     sync_file(full_item_path, new_target_path)
         else:
-            os.remove(target_path)
-            os.mkdir(target_path)
+            if DB.count_target_path(target_path) > 1:
+                os.remove(target_path)
+                os.mkdir(target_path)
             sync_folder(folder_path, target_path)
     else:
         os.symlink(folder_path, target_path)
