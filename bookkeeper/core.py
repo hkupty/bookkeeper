@@ -22,16 +22,16 @@ def list_apps():
     """ Show all installed packages. """
     _db = DB.get_instance()
     print("Installed Apps")
-    print("{0:<15}{1:<15}{2:<15}".format("APP", "PATH", "INSTALLED AT"))
+    print("{0:<15}{1:<35}{2:<35}".format("APP", "PATH", "INSTALLED AT"))
     for app, source, target in _db.fetch_app():
-        print("{0:<15}{1:<15}{2:<15}".format(
+        print("{0:<15}{1:<35}{2:<35}".format(
             app, source, target
         ))
     print("Not Installed Apps (local folder)")
-    print("{0:<15}{1:<15}".format("APP", "PATH"))
+    print("{0:<15}{1:<35}".format("APP", "PATH"))
     for i in os.listdir(os.curdir):
         if os.path.isdir(i):
-            print("{0:<15}{1:<15}".format(
+            print("{0:<15}{1:<35}".format(
                 i, os.path.abspath(i)
             ))
 
@@ -84,7 +84,8 @@ def sync_folder(folder_path, target_path):
                 else:
                     sync_file(full_item_path, new_target_path)
         else:
-            if DB.count_target_path(target_path) > 1:
+            _db = DB.get_instance()
+            if _db.count_target_path(target_path) > 1:
                 os.remove(target_path)
                 os.mkdir(target_path)
             sync_folder(folder_path, target_path)
