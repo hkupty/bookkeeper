@@ -49,7 +49,7 @@ def sync(app=None):
     _db = DB.get_instance()
     app_l = _db.fetch_app(app)
     for app, source_path, target_path in app_l:
-        sync_folder(source_path, target_path)
+        sync_folder(app, source_path, target_path)
 
 
 def sync_file(file_path, target_path):
@@ -66,13 +66,15 @@ def sync_file(file_path, target_path):
         os.symlink(file_path, target_path)
 
 
-def sync_folder(folder_path, target_path):
+def sync_folder(app, folder_path, target_path):
     """ Sync folders.
 
     :param folder_path: source folder.
     :param target_path: target folder.
     """
     if os.path.exists(target_path):
+        if DB.get_app_for_folder(target_path) == app:
+            return
         if not os.path.isdir(target_path):
             raise os.error("Target folder is a file.")
         elif not os.path.islink(target_path):
@@ -80,7 +82,7 @@ def sync_folder(folder_path, target_path):
                 full_item_path = os.path.join(folder_path, item)
                 new_target_path = os.path.join(target_path, item)
                 if os.path.isdir(full_item_path):
-                    sync_folder(full_item_path, new_target_path)
+                    sync_folder(app, full_item_path, new_target_path)
                 else:
                     sync_file(full_item_path, new_target_path)
         else:

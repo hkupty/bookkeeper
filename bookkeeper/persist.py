@@ -87,6 +87,15 @@ class DB(object):
 
         return self.qry(query, (path, ))
 
+    def get_app_for_folder(self, target_folder):
+        """ Return app. """
+        query = """
+        SELECT app
+        FROM apps
+        WHERE target_path = ?
+        """
+        return self.qry(query, (target_folder, ))
+
     def fetch_app(self, app=None):
         """ Return app row.
 
