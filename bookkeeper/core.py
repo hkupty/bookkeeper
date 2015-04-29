@@ -1,5 +1,5 @@
 # encoding: utf-8
-""" Core functionality.
+"""Core functionality.
 
 This is where we understand and implement
 the logic behind the whole process.
@@ -11,7 +11,7 @@ from bookkeeper.sync import sync as sync_items
 
 
 def link(source, target):
-    """ Install all items in app as symlinks in target. """
+    """Install all items in app as symlinks in target."""
     _db = DB.get_instance()
     full_source = os.path.abspath(source)
     _, app = os.path.split(full_source)
@@ -20,7 +20,7 @@ def link(source, target):
 
 
 def list_apps():
-    """ Show all installed packages. """
+    """Show all installed packages."""
     _db = DB.get_instance()
     print("Installed Apps")
     print("{0:<15}{1:<35}{2:<35}".format("APP", "PATH", "INSTALLED AT"))
@@ -39,7 +39,7 @@ def list_apps():
 
 
 def sync(app=None):
-    """ Sync all items from source.
+    """Sync all items from source.
 
     If file and not in target, create symlink.
     If file and in target, ignore.

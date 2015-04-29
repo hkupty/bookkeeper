@@ -1,5 +1,5 @@
 # encoding: utf-8
-""" Sync source on target be it file or folder.
+"""Sync source on target be it file or folder.
 
 There are some specific rules for syncing, which are specified below:
 On files,
@@ -24,7 +24,7 @@ import os
 
 
 def sync(item_path, target_path):
-    """ Switch between file and folder syning. """
+    """Switch between file and folder syning."""
     if os.path.isdir(item_path):
         sync_folder(item_path, target_path)
     else:
@@ -32,7 +32,7 @@ def sync(item_path, target_path):
 
 
 def sync_file(file_path, target_path):
-    """ Sync file on target path. """
+    """Sync file on target path."""
     if os.path.exists(target_path) and not os.path.islink(target_path):
         raise os.error("File exists: {}".format(file_path))
     elif os.path.islink(target_path):
@@ -55,7 +55,7 @@ def sync_folder(folder_path, target_path):
 
 
 def merge(folder_path, target_path):
-    """ Link all itens on folder onto target folder. """
+    """Link all itens on folder onto target folder."""
     for item in os.listdir(folder_path):
         sync(
             os.path.join(folder_path, item),

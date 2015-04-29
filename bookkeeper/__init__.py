@@ -1,5 +1,5 @@
 # encoding: utf-8
-""" Bookkeeper.
+"""Bookkeeper.
 
 This project intends to bring friendlier functionality to GNU Stow,
 allowing quick smarter management.

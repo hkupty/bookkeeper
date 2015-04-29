@@ -1,5 +1,5 @@
 # encoding: utf-8
-""" Module frontend. """
+"""Module frontend."""
 import argparse
 import sys
 from bookkeeper import cli

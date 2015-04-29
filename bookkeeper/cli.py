@@ -1,5 +1,5 @@
 # encoding: utf-8
-""" Command Line Interface.
+"""Command Line Interface.
 
 Every set of params and input shall and will be treated here.
 """
@@ -8,7 +8,7 @@ import sys
 
 
 def init(fargs):
-    """ Init the db. """
+    """Init the db."""
     from bookkeeper.persist import install, DB
     DB.set_verbose(fargs.verbose)
     install()
@@ -17,7 +17,7 @@ def init(fargs):
 
 
 def sync(fargs):
-    """ Sync all installed links. """
+    """Sync all installed links."""
     from bookkeeper.core import sync as core_sync
     app = fargs.app
     core_sync(app)
@@ -26,7 +26,7 @@ def sync(fargs):
 
 
 def link(fargs):
-    """ Link target with destination. """
+    """Link target with destination."""
     from bookkeeper.core import link as core_link
     source_path = fargs.source
     target_path = fargs.target
@@ -36,7 +36,7 @@ def link(fargs):
 
 
 def list_apps(fargs):
-    """ Unlink target. """
+    """Unlink target."""
     from bookkeeper.core import list_apps as core_list
     core_list()
 
@@ -44,10 +44,10 @@ def list_apps(fargs):
 
 
 def unlink(fargs):
-    """ Unlink target. """
+    """Unlink target."""
     pass
 
 
 def drop(fargs):
-    """ Drop the database. """
+    """Drop the database."""
     pass

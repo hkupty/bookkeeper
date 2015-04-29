@@ -4,7 +4,8 @@ import os
 
 
 def get_path(path):
-    """ return expanded path.
+    """Return expanded path.
+
     :param path: Possibly contracted path.
     :return: Expanded path.
     """

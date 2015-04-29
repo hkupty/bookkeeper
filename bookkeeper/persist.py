@@ -1,5 +1,5 @@
 # encoding: utf-8
-""" Small database wrapper allowing install management.
+"""Small database wrapper allowing install management.
 
 This allows bookkeeper to keep track of which is installed (and where).
 """
@@ -11,29 +11,29 @@ DB_FILE = '~/.bookkeeper.db'
 
 class DB(object):
 
-    """ Manages the sqlite connection. """
+    """Manages the sqlite connection."""
 
     _instance = None
 
     @classmethod
     def get_instance(cls):
-        """ Singleton instance. """
+        """Singleton instance."""
         if DB._instance is None:
             DB._instance = cls()
         return DB._instance
 
     @classmethod
     def set_verbose(cls, verbose):
-        """ Toggle verbosity. """
+        """Toggle verbosity."""
         cls.get_instance().verbose = verbose
 
     def __init__(self, verbose=False):
-        """ Create sqlite connection. """
+        """Create sqlite connection."""
         self.path = get_path(DB_FILE)
         self.verbose = verbose
 
     def exc(self, command, *args):
-        """ Wrapper for sqlite exec. """
+        """Wrapper for sqlite exec."""
         with sqlite3.connect(self.path) as connection:
             if self.verbose:
                 print(command, args)
@@ -48,7 +48,7 @@ class DB(object):
                 connection.commit()
 
     def qry(self, query, *args):
-        """ Wrapper for sqlite exec. """
+        """Wrapper for sqlite exec."""
         with sqlite3.connect(self.path) as connection:
             if self.verbose:
                 print(query, args)
@@ -56,7 +56,7 @@ class DB(object):
             return connection.execute(query, *args)
 
     def list_app_items(self, app):
-        """ Return all items listed in the app. """
+        """Return all items listed in the app."""
         query = """
         SELECT app, object, type
         FROM inner
@@ -67,7 +67,7 @@ class DB(object):
         return self.qry(query, (app, ))
 
     def count_target_path(self, path="/"):
-        """ Check if path exists on the db.
+        """Check if path exists on the db.
 
         Given the example:
             test    /opt/dotfiles/test/ /home/user/test/
@@ -88,7 +88,7 @@ class DB(object):
         return self.qry(query, (path, ))
 
     def get_app_for_folder(self, target_folder):
-        """ Return app. """
+        """Return app."""
         query = """
         SELECT app
         FROM apps
@@ -97,7 +97,7 @@ class DB(object):
         return self.qry(query, (target_folder, ))
 
     def fetch_app(self, app=None):
-        """ Return app row.
+        """Return app row.
 
         If app is None, return all apps.
         """
@@ -106,29 +106,29 @@ class DB(object):
         FROM apps
         """
         if app is not None:
-            query += """ WHERE app = ? """
+            query += """WHERE app = ? """
             return self.qry(query, (app, ))
         return self.qry(query)
 
     def add_item(self, app, item, item_type):
-        """ Simple wrapper for inserting item. """
+        """Simple wrapper for inserting item."""
         self.exc(
-            """ INSERT OR IGNORE INTO inner (app, object, type)
+            """INSERT OR IGNORE INTO inner (app, object, type)
             VALUES (?, ?, ?) """,
             (app, item, item_type, )
         )
 
     def add_app(self, app, source, target):
-        """ Simple wrapper for inserting app. """
+        """Simple wrapper for inserting app."""
         self.exc(
-            """ INSERT OR IGNORE INTO apps (app, source_path, target_path)
+            """INSERT OR IGNORE INTO apps (app, source_path, target_path)
             VALUES (?, ?, ?) """,
             (app, source, target, )
         )
 
 
 def install():
-    """ Create basic db. """
+    """Create basic db."""
     db = DB.get_instance()
 
     db.exc("""CREATE TABLE IF NOT EXISTS apps
