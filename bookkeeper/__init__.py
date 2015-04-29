@@ -16,4 +16,4 @@ __author__ = "Henry 'Ingvij' Kupty"
 __app__ = "Bookkeeper"
 __version__ = "0.0.2"
 __license__ = "BSD"
-__all__ = [ "persist", "cli", "core" ]
+__all__ = ["persist", "cli", "core"]
