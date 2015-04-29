@@ -30,6 +30,7 @@ def list_apps():
         ))
     print("Not Installed Apps (local folder)")
     print("{0:<15}{1:<35}".format("APP", "PATH"))
+    # TODO: Exclude already installed apps
     for i in os.listdir(os.curdir):
         if os.path.isdir(i):
             print("{0:<15}{1:<35}".format(

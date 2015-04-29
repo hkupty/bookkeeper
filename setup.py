@@ -4,9 +4,9 @@ from distutils.core import setup
 
 with open("bookkeeper/__init__.py") as f:
     bookkeeper = {
-        k.split(' = ')[0]: k.split(' = ')[1]
+        k.split(' = ')[0]: k.split(' = ')[1].replace('"','').replace("\n","")
         for k in f.readlines()
-        if "=" in k
+        if " = " in k
     }
 
 setup(
