@@ -1,5 +1,5 @@
 # encoding: utf-8
-""" Some commonly used functions and stuff. """
+"""Some commonly used functions and stuff."""
 import os
 
 

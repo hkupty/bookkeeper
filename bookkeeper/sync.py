@@ -5,17 +5,17 @@ There are some specific rules for syncing, which are specified below:
 On files,
 * if none, creates symlink;
 * if file or folder exists, error;
-* if symlink exists, 
+* if symlink exists,
   * if self, pass;
-  * if not self, error. 
+  * if not self, error.
 
-On folders, 
+On folders,
 * if none, creates symlink;
 * if file exists, error;
 * if folder exists, merge;
-* if symlink exists, 
+* if symlink exists,
   * if self, pass;
-  * if folder, 
+  * if folder,
     * from bk, create folder & merge;
     * not from bk, error;
   * if file, error.

@@ -56,4 +56,3 @@ def sync(app=None):
                 os.path.join(source_path, item),
                 os.path.join(target_path, item)
             )
-
