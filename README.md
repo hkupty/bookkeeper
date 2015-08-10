@@ -1,6 +1,8 @@
 Bookkeeper
 ==========
-[![Code Health](https://landscape.io/github/hkupty/bookkeeper/master/landscape.svg)](https://landscape.io/github/hkupty/bookkeeper/master) [![Development Status](https://pypip.in/status/Bookkeeper/badge.svg)](https://pypi.python.org/pypi/Bookkeeper/)
+[![Code Health](https://landscape.io/github/hkupty/bookkeeper/master/landscape.svg)](https://landscape.io/github/hkupty/bookkeeper/master)
+[![PyPI version](https://badge.fury.io/py/Bookkeeper.svg)](http://badge.fury.io/py/Bookkeeper)
+[![Build Status](https://drone.io/github.com/hkupty/bookkeeper/status.png)](https://drone.io/github.com/hkupty/bookkeeper/latest)
 
 GNU Stow with steroids!
 
