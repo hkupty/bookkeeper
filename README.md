@@ -3,6 +3,7 @@ Bookkeeper
 [![Code Health](https://landscape.io/github/hkupty/bookkeeper/master/landscape.svg)](https://landscape.io/github/hkupty/bookkeeper/master)
 [![PyPI version](https://badge.fury.io/py/Bookkeeper.svg)](http://badge.fury.io/py/Bookkeeper)
 [![Build Status](https://drone.io/github.com/hkupty/bookkeeper/status.png)](https://drone.io/github.com/hkupty/bookkeeper/latest)
+[![Code Climate](https://codeclimate.com/github/hkupty/bookkeeper/badges/gpa.svg)](https://codeclimate.com/github/hkupty/bookkeeper)
 
 GNU Stow with steroids!
 
